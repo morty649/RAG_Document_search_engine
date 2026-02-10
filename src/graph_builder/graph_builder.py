@@ -2,7 +2,7 @@
 
 from langgraph.graph import StateGraph, END
 from src.state.rag_state import RAGState
-from src.nodes.reactnode import RAGNodes #wait a minute
+from src.nodes.nodes import RAGNodes 
 
 
 class GraphBuilder:
