@@ -27,5 +27,5 @@ class Config:
     @classmethod
     def get_llm(cls):
         """Initialize and return the LLM model"""
-        os.environ["OPENAI_API_KEY"] = cls.GROQ_API_KEY
+        os.environ["GROQ_API_KEY"] = cls.GROQ_API_KEY
         return init_chat_model(cls.LLM_MODEL)
