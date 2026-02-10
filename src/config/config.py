@@ -2,7 +2,10 @@
 
 import os
 from langchain.chat_models import init_chat_model
+from dotenv import load_dotenv
 
+# loading environment variables
+load_dotenv()
 
 
 class Config:

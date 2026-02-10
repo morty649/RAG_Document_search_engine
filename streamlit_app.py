@@ -147,3 +147,6 @@ def main():
                 st.markdown(f"**A:** {item['answer'][:200]}...")
                 st.caption(f"Time: {item['time']:.2f}s")
                 st.markdown("")
+
+if __name__ == "__main__":
+    main()
