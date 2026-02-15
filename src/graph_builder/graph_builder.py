@@ -1,8 +1,10 @@
 """Graph builder for LangGraph workflow"""
 
+import uuid
+from uuid import uuid4
 from langgraph.graph import StateGraph, END
 from src.state.rag_state import RAGState
-from src.nodes.nodes import RAGNodes 
+from src.nodes.reactnode import RAGNodes 
 
 
 class GraphBuilder:
@@ -58,4 +60,5 @@ class GraphBuilder:
             self.build()
         
         initial_state = RAGState(question=question)
-        return self.graph.invoke(initial_state)
+        config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+        return self.graph.invoke(initial_state,config)

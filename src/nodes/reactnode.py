@@ -1,5 +1,6 @@
 """LangGraph nodes for RAG workflow + ReAct Agent inside generate_content"""
-
+import uuid
+from uuid import uuid4
 from typing import List, Optional
 from src.state.rag_state import RAGState
 
@@ -51,13 +52,11 @@ class RAGNodes:
         )
 
         wiki = WikipediaQueryRun(
-            api_wrapper=WikipediaAPIWrapper(top_k_results=3, lang="en")
+        api_wrapper=WikipediaAPIWrapper(top_k_results=3, lang="en")
         )
-        wikipedia_tool = Tool(
-            name="wikipedia",
-            description="Search Wikipedia for general knowledge.",
-            func=wiki.run,
-        )
+
+        wikipedia_tool = wiki
+
 
         return [retriever_tool, wikipedia_tool]
     
@@ -69,7 +68,7 @@ class RAGNodes:
             "Prefer 'retriever' for user-provided docs; use 'wikipedia' for general knowledge. "
             "Return only the final useful answer."
         )
-        self._agent = create_agent(self.llm, tools=tools,prompt=system_prompt)
+        self._agent = create_agent(self.llm, tools=tools,system_prompt=system_prompt)
 
     def generate_answer(self, state: RAGState) -> RAGState:
         """
